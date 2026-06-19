@@ -68,4 +68,16 @@ button.link { background: none; border: none; color: var(--accent); padding: 0; 
 .dot.sending, .dot.publishing, .dot.scheduled { background: var(--warn); }
 .dot.sent, .dot.created { background: var(--accent2); }
 .dot.error, .dot.failed { background: var(--err); }
-footer { text-align: center; color: var(--muted); font-size: 12px; padding: 20px; }
+footer { display: flex; flex-direction: column; align-items: center; gap: 12px; color: var(--muted); font-size: 12px; padding: 26px 20px; }
+.follow {
+  display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+  background: var(--card); border: 1px solid var(--line); border-radius: 40px;
+  padding: 6px 16px 6px 6px; color: var(--ink); transition: border-color .15s, transform .1s;
+}
+.follow:hover { border-color: var(--err); transform: translateY(-1px); }
+.follow img { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; background: var(--card2); }
+.follow strong { color: var(--err); }
+.extlinks { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
+.extlinks a { color: var(--accent); text-decoration: none; }
+.extlinks a:hover { text-decoration: underline; }
+.fineprint { opacity: .8; }
