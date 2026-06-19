@@ -1,0 +1,17 @@
+{
+  "buffer": {
+    "apiKey": "YOUR_BUFFER_PERSONAL_API_KEY"
+  },
+  "storage": {
+    "backend": "s3",
+    "s3": {
+      "endpoint": "https://<accountid>.r2.cloudflarestorage.com",
+      "region": "auto",
+      "bucket": "my-bucket",
+      "accessKeyId": "YOUR_R2_ACCESS_KEY_ID",
+      "secretAccessKey": "YOUR_R2_SECRET",
+      "publicBaseUrl": "https://pub-xxxxxxxx.r2.dev",
+      "keyPrefix": "beamclip/"
+    }
+  }
+}

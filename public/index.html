@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>beamclip</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>📡 beamclip</h1>
+    <p class="tag">Video → eigener Speicher → TikTok · Instagram · YouTube (über Buffer)</p>
+  </header>
+
+  <main>
+    <!-- 1. SETTINGS -->
+    <section class="card" id="settings">
+      <h2>1 · Einstellungen</h2>
+
+      <label>Buffer Personal API Key
+        <span class="hint">Buffer → Settings → API → Personal Keys → New Key</span>
+        <input type="password" id="bufferKey" placeholder="bleibt leer = unverändert" autocomplete="off">
+      </label>
+
+      <label>Upload-Ziel
+        <select id="backend">
+          <option value="s3">S3-kompatibel (Cloudflare R2, AWS S3, Backblaze B2, MinIO …)</option>
+          <option value="url">Eigene öffentliche URL (kein Upload)</option>
+        </select>
+      </label>
+
+      <div id="s3fields">
+        <div class="grid2">
+          <label>Endpoint <span class="hint">R2: https://&lt;accountid&gt;.r2.cloudflarestorage.com · AWS: leer lassen</span>
+            <input id="s3endpoint" placeholder="https://….r2.cloudflarestorage.com"></label>
+          <label>Region <input id="s3region" placeholder="auto"></label>
+          <label>Bucket <input id="s3bucket" placeholder="mein-bucket"></label>
+          <label>Key-Prefix <input id="s3prefix" placeholder="beamclip/"></label>
+          <label>Access Key ID <input id="s3akid" placeholder="bleibt leer = unverändert" autocomplete="off"></label>
+          <label>Secret Access Key <input id="s3secret" type="password" placeholder="bleibt leer = unverändert" autocomplete="off"></label>
+        </div>
+        <label>Öffentliche Basis-URL <span class="hint">so wird das Objekt für Buffer erreichbar — R2 r2.dev-URL / eigene Domain, S3 Website/CDN</span>
+          <input id="s3public" placeholder="https://pub-xxxx.r2.dev"></label>
+      </div>
+
+      <div class="row">
+        <button id="saveCfg">Speichern</button>
+        <button id="testStorage" class="ghost">Speicher testen</button>
+        <span id="cfgStatus" class="status"></span>
+      </div>
+    </section>
+
+    <!-- 2. VIDEO -->
+    <section class="card" id="videoCard">
+      <h2>2 · Video</h2>
+      <div id="urlMode" class="hidden">
+        <label>Öffentliche Video-URL
+          <input id="manualUrl" placeholder="https://…/clip.mp4"></label>
+      </div>
+      <div id="fileMode">
+        <div id="drop" class="drop">
+          <input type="file" id="file" accept="video/*" hidden>
+          <p>🎬 Video hierher ziehen oder <button class="link" id="pick">auswählen</button></p>
+          <p class="hint" id="fileInfo"></p>
+        </div>
+        <div class="bar hidden" id="localBarWrap"><div class="fill" id="localBar"></div></div>
+      </div>
+    </section>
+
+    <!-- 3. CHANNELS -->
+    <section class="card" id="channelsCard">
+      <h2>3 · Kanäle &amp; Texte</h2>
+      <div class="row">
+        <button id="loadChannels" class="ghost">Kanäle laden</button>
+        <label class="inline">Modus
+          <select id="mode">
+            <option value="shareNow">Sofort posten</option>
+            <option value="addToQueue">In die Queue</option>
+            <option value="customScheduled">Geplant (Zeit)</option>
+          </select>
+        </label>
+        <label class="inline" id="dueWrap" style="display:none">Zeitpunkt
+          <input type="datetime-local" id="dueAt"></label>
+      </div>
+      <div id="channels"></div>
+    </section>
+
+    <!-- 4. PUBLISH -->
+    <section class="card" id="publishCard">
+      <h2>4 · Hochladen &amp; Posten</h2>
+      <div class="row">
+        <button id="go" class="primary">🚀 Upload &amp; posten</button>
+        <span id="goStatus" class="status"></span>
+      </div>
+      <div class="phase">
+        <span>Upload zum Speicher</span>
+        <div class="bar"><div class="fill" id="uploadBar"></div></div>
+        <span id="uploadPct">0%</span>
+      </div>
+      <div id="urlOut" class="hint mono"></div>
+      <div id="results"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span>beamclip · MIT · läuft komplett lokal, deine Keys verlassen den Rechner nicht</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

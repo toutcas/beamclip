@@ -1,0 +1,33 @@
+{
+  "name": "beamclip",
+  "version": "0.1.0",
+  "description": "Local web app to upload a video to your own storage (Cloudflare R2 / S3-compatible) and post it to TikTok, Instagram & YouTube via the Buffer API — with editable captions, hashtags and live upload/sharing status.",
+  "type": "module",
+  "bin": {
+    "beamclip": "server/index.js"
+  },
+  "scripts": {
+    "start": "node server/index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "buffer",
+    "social-media",
+    "video",
+    "tiktok",
+    "instagram",
+    "youtube",
+    "cloudflare-r2",
+    "s3",
+    "scheduler"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.637.0",
+    "@aws-sdk/lib-storage": "^3.637.0",
+    "express": "^4.19.2",
+    "multer": "^2.2.0"
+  }
+}
